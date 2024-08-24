@@ -1,0 +1,63 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+  <!-- Mostrar mensaje de confirmación en caso de éxito -->
+  <div th:if="${msg != null}">
+    <script>
+      Swal.fire({
+          title: "Confirmación",
+          text: '[[${msg}]]',
+          icon: "success"
+      });
+    </script>
+  </div>
+
+  <!-- Mostrar mensaje de error en caso de error -->
+  <div th:if="${error != null}">
+    <script>
+      Swal.fire({
+          title: "Error",
+          text: '[[${error}]]',
+          icon: "error"
+      });
+    </script>
+  </div>
+
+  <h1>Listado de Libros</h1>
+  <a th:href="@{/libros/create}" class="btn btn-outline-primary">Nuevo libro</a>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Fecha de Publicación</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${libros}">
+      <td th:text="${item.id}"></td>
+      <td th:text="${item.titulo}"></td>
+      <td th:text="${item.autor}"></td>
+      <td th:text="${item.fechaPublicacion}"></td>
+      <td>
+        <a th:href="@{/libros/details/{id} (id = ${item.id}) }" class="btn btn-outline-secondary">Detalles</a>
+        <a th:href="@{/libros/edit/{id} (id = ${item.id}) }" class="btn btn-outline-info">Editar</a>
+        <a th:href="@{/libros/remove/{id} (id = ${item.id}) }" class="btn btn-outline-danger">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <nav aria-label="page navigation example">
+    <ul class="pagination">
+      <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+        <a class="page-link" th:href="@{|/libros?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+      </li>
+    </ul>
+  </nav>
+</div>
