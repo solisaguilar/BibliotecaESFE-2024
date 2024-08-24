@@ -1,0 +1,60 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+    <h1>Editar Editorial</h1>
+    <form th:action="@{/editoriales/save}" th:object="${editorial}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="Escriba el nombre de la editorial" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" class="form-control" th:field="*{direccion}" id="direccion" placeholder="Escriba la dirección de la editorial" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}" id="telefono" placeholder="Escriba el teléfono de la editorial" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="correoElectronico">CorreoElectrónico</label>
+                    <input type="email" class="form-control" th:field="*{correoElectronico}" id="correoElectronico" placeholder="Escriba el correo electrónico de la editorial" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pais">País</label>
+                    <input type="text" class="form-control" th:field="*{pais}" id="pais" placeholder="Escriba el país de la editorial" required>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a th:href="@{/editoriales}" class="btn btn-secondary">Regresar</a>
+    </form>
+</div>
